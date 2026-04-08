@@ -1,0 +1,26 @@
+▲ Next.js 16.2.1 (Turbopack)
+- Environments: .env.local
+- Experiments (use with caution):
+  · optimizePackageImports
+
+  Creating an optimized production build ...
+
+
+> Build error occurred
+Error: Turbopack build failed with 1 errors:
+./pages/api/admin/setup.js:2:1
+Module not found: Can't resolve 'bcryptjs'
+  [90m1 |[0m [36mimport[0m { supabaseAdmin } [36mfrom[0m [32m'../../../lib/supabase'[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m bcrypt [36mfrom[0m [32m'bcryptjs'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m
+  [90m4 |[0m [90m// GET /api/admin/setup — seeds demo data (tables must already exist)[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m handler(req, res) {
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (./pages/api/admin/setup.js:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)

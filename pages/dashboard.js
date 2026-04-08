@@ -21,6 +21,10 @@ const QUICK_ACTIONS = [
   { href: '/events', icon: Ticket, label: 'Events', color: '#10b981', desc: 'Buy tickets' },
 ];
 
+const VENDOR_QUICK_ACTIONS = [
+  { href: '/vendor-items', icon: Layers, label: 'Manage Items', color: '#06b6d4', desc: 'Add/view your listed items' },
+];
+
 export default function Dashboard() {
   const router = useRouter();
   const [user, setUser] = useState(null);
@@ -137,7 +141,7 @@ export default function Dashboard() {
             <div className="card" style={{ padding: 20, marginBottom: 20 }}>
               <div style={{ fontWeight: 600, marginBottom: 14 }}>Quick Actions</div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
-                {QUICK_ACTIONS.map(({ href, icon: Icon, label, color, desc }) => (
+                {(user?.role === 'vendor' ? VENDOR_QUICK_ACTIONS : QUICK_ACTIONS).map(({ href, icon: Icon, label, color, desc }) => (
                   <Link key={href} href={href}>
                     <div
                       style={{ padding: '16px 12px', borderRadius: 12, background: `${color}0d`, border: `1px solid ${color}22`, cursor: 'pointer', textAlign: 'center', transition: 'all 0.2s' }}

@@ -1,4 +1,4 @@
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 import { supabaseAdmin } from '../../../lib/supabase';
 import { signToken } from '../../../lib/auth';
 

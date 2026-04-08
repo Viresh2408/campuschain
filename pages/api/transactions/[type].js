@@ -4,19 +4,32 @@ import { P2PTransferContract } from '../../../lib/contracts/P2PTransferContract'
 import { VendorPaymentContract } from '../../../lib/contracts/VendorPaymentContract';
 import { EventTicketContract } from '../../../lib/contracts/EventTicketContract';
 import { detectFraud } from '../../../lib/fraudDetection';
+import { logTransferEvent, logApiEvent } from '../../../lib/cloudwatch';
 
 async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   const { type } = req.query;
   const userId = req.user.id;
+  const userName = req.user.name || req.user.email;
+  const startTime = Date.now();
 
   try {
     // Run fraud check first (non-blocking — just flags)
     const { amount, toId, vendorId } = req.body;
     if (amount) {
-      const fraud = await detectFraud({ userId, amount: Number(amount), type, toUser: toId || vendorId });
+      const fraud = await detectFraud({
+        userId,
+        amount: Number(amount),
+        type,
+        toUser: toId || vendorId,
+        userName,
+      });
       if (fraud.isSuspect && fraud.severity === 'high') {
+        // Log the blocked request to CloudWatch
+        await logApiEvent(`/api/transactions/${type}`, userId, 400, Date.now() - startTime, {
+          blocked: true, reason: 'fraud_high_severity',
+        });
         return res.status(400).json({ error: 'Transaction flagged by fraud detection system. Contact admin.', fraud });
       }
     }
@@ -48,8 +61,22 @@ async function handler(req, res) {
         return res.status(404).json({ error: 'Unknown transaction type' });
     }
 
+    const duration = Date.now() - startTime;
+
+    // AWS: Emit CloudWatch metric & log for successful transaction (fire-and-forget)
+    logTransferEvent(userId, Number(amount || 0), type, result?.txId || result?.tx_id || 'unknown')
+      .catch(err => console.error('[CW] Transfer log error:', err.message));
+
+    logApiEvent(`/api/transactions/${type}`, userId, 200, duration)
+      .catch(err => console.error('[CW] API log error:', err.message));
+
     return res.json({ success: true, ...result });
   } catch (err) {
+    // Log error to CloudWatch
+    logApiEvent(`/api/transactions/${type}`, userId, 500, Date.now() - startTime, {
+      error: err.message,
+    }).catch(() => {});
+
     return res.status(400).json({ error: err.message });
   }
 }

@@ -82,14 +82,14 @@ export default function Leaderboard() {
                           <span style={{ fontWeight: u.rank <= 3 ? 700 : 400 }}>{u.name}</span>
                         </div>
                       </td>
-                      <td><span className="mono" style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{u.student_id}</span></td>
+                      <td><span className="display-font" style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{u.student_id}</span></td>
                       <td><span className={`badge badge-${u.role === 'admin' ? 'yellow' : u.role === 'vendor' ? 'cyan' : 'blue'}`}>{u.role}</span></td>
                       <td>
-                        <span style={{ fontWeight: 700, color: u.rank === 1 ? '#FFD700' : 'var(--success)', fontFamily: 'JetBrains Mono' }}>
+                        <span style={{ fontWeight: 700, color: u.rank === 1 ? '#FFD700' : 'var(--success)', fontFamily: 'Space Grotesk', fontSize: '1rem' }}>
                           {u.balance?.toLocaleString('en-IN', { maximumFractionDigits: 2 })} CC
                         </span>
                       </td>
-                      <td style={{ color: 'var(--danger)', fontFamily: 'JetBrains Mono', fontSize: '0.85rem' }}>{u.volume?.toFixed(2)} CC</td>
+                      <td style={{ color: 'var(--danger)', fontFamily: 'Space Grotesk', fontSize: '0.95rem' }}>{u.volume?.toFixed(2)} CC</td>
                       <td style={{ color: 'var(--text-secondary)' }}>{u.txCount}</td>
                     </tr>
                   ))}

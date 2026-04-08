@@ -1,0 +1,47 @@
+# Git
+.git
+.gitignore
+
+# Dependencies (will be installed fresh in Docker)
+node_modules
+
+# Next.js build output (rebuilt in container)
+.next
+
+# Development environment files
+.env.local
+.env.development
+
+# Large binary/media files
+*.pdf
+*.pptx
+*.ppt
+
+# Python scripts (not needed in container)
+*.py
+__pycache__
+*.pyc
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
+.vscode
+.idea
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Test files
+*.test.js
+*.spec.js
+__tests__
+
+# Documentation
+README.md
+campuschain_presentation_script.md
+
+# Deployment scripts (not needed inside container)
+deploy/

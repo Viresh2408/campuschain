@@ -7,7 +7,7 @@ import { ArrowUpRight, ArrowDownLeft, CreditCard, Ticket, TrendingUp, Layers, Re
 
 const authFetch = (url, token) => fetch(url, { headers: { Authorization: `Bearer ${token}` } }).then(r => r.json());
 
-const TYPE_COLORS = { fee_payment: '#f59e0b', p2p_transfer: '#6366f1', vendor_payment: '#06b6d4', event_ticket: '#10b981', mint: '#10b981', burn: '#ef4444' };
+const TYPE_COLORS = { fee_payment: '#f59e0b', p2p_transfer: '#c799ff', vendor_payment: '#4af8e3', event_ticket: '#7c4dff', mint: '#4af8e3', burn: '#ff6e84' };
 const TYPE_ICONS = { fee_payment: CreditCard, p2p_transfer: ArrowUpRight, vendor_payment: ArrowDownLeft, event_ticket: Ticket, mint: TrendingUp };
 
 export default function WalletPage() {
@@ -104,12 +104,12 @@ export default function WalletPage() {
                               {isOut ? (tx.receiver?.name || 'University') : (tx.sender?.name || 'System')}
                             </td>
                             <td>
-                              <span style={{ color: isOut ? 'var(--danger)' : 'var(--success)', fontWeight: 700, fontFamily: 'JetBrains Mono' }}>
+                              <span style={{ color: isOut ? 'var(--danger)' : 'var(--success)', fontWeight: 700, fontFamily: 'Space Grotesk', fontSize: '1rem' }}>
                                 {isOut ? '–' : '+'}{tx.amount?.toFixed(2)} CC
                               </span>
                             </td>
                             <td>
-                              <span className="mono" style={{ fontSize: '0.68rem', color: 'var(--accent-bright)' }}>
+                              <span className="display-font" style={{ fontSize: '0.75rem', color: 'var(--accent-bright)' }}>
                                 {tx.tx_id?.slice(0, 16)}…
                               </span>
                             </td>

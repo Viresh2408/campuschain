@@ -1,5 +1,5 @@
 import { supabaseAdmin } from '../../../lib/supabase';
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 
 // GET /api/admin/setup — seeds demo data (tables must already exist)
 export default async function handler(req, res) {
