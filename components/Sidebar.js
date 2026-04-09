@@ -17,6 +17,7 @@ const studentNav = [
   { href: '/events', icon: Ticket, label: 'Events' },
   { href: '/leaderboard', icon: BarChart2, label: 'Leaderboard' },
   { href: '/request-tokens', icon: Bell, label: 'Request Tokens' },
+  { href: '/documents', icon: FileText, label: 'My Documents' },
   { href: '/analytics', icon: BarChart2, label: 'Analytics' },
 ];
 

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Sidebar from '../components/Sidebar';
 import WalletCard from '../components/WalletCard';
 import { useRealtimeBalance } from '../hooks/useRealtimeBalance';
-import { ArrowUpRight, ArrowDownLeft, CreditCard, TrendingUp, Shield, Layers, Ticket, Bell, Activity } from 'lucide-react';
+import { ArrowUpRight, ArrowDownLeft, CreditCard, TrendingUp, Shield, Layers, Ticket, Bell, Activity, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 
@@ -18,7 +18,7 @@ const QUICK_ACTIONS = [
   { href: '/pay/fees', icon: CreditCard, label: 'Pay Fees', color: '#f59e0b', desc: 'Tuition, Lab, Library' },
   { href: '/pay/transfer', icon: ArrowUpRight, label: 'P2P Transfer', color: '#6366f1', desc: 'Send to students' },
   { href: '/pay/vendor', icon: ArrowDownLeft, label: 'Vendor Pay', color: '#06b6d4', desc: 'QR payments' },
-  { href: '/events', icon: Ticket, label: 'Events', color: '#10b981', desc: 'Buy tickets' },
+  { href: '/documents', icon: ShieldCheck, label: 'Docs Safe', color: '#8b5cf6', desc: 'Secure S3 uploads' },
 ];
 
 const VENDOR_QUICK_ACTIONS = [
